@@ -74,6 +74,13 @@ const rootResolvers = {
         ))
         .then(() => (
           context.Entries.submitRepository(repoFullName, context.user.login)
+          .catch((error) => {
+            if (error.message.includes("UNIQUE constraint failed: entries.repository_name")) {
+                throw new Error(`"${repoFullName}" has already been submitted.`);
+            } else {
+              throw error;
+            }
+          })
         ))
         .then(() => context.Entries.getByRepoFullName(repoFullName));
     },

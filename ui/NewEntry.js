@@ -47,7 +47,7 @@ class NewEntry extends React.Component {
 
           {submitRepository.errors && (
             <div className="alert alert-danger" role="alert">
-              {submitRepository.errors[0].message}
+              {submitRepository.errors.message}
             </div>
           )}
 
